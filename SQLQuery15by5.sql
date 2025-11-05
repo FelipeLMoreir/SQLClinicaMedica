@@ -173,3 +173,4 @@ ALTER TABLE MedicosEspecialidades
 ADD FOREIGN KEY (idMedico) REFERENCES Medicos(idMedico),
 FOREIGN KEY (idEspecialidade) REFERENCES EspecialidadesMedicas
 (idEspecialidade)
+
