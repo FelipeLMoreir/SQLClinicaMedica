@@ -80,3 +80,25 @@ Disgnostico, idPaciente, idMedico)
 VALUES(GETDATE(), 1, 1, '', 1, 4)
 
 SELECT * FROM Consultas
+
+SELECT * FROM Convenios
+INSERT INTO Convenios (NomeConvenio, CNPJ)
+VALUES('Unimed', 123456789), ('HapVida', 987654321), 
+('SulAmerica', 456456456)
+
+UPDATE Convenios
+SET Siteconvenio = 'https://google.com'
+Where idConvenio = 3
+
+ALTER TABLE Convenios
+ALTER COLUMN SiteConvenio VARCHAR(50)
+
+INSERT INTO TelefonesConvenios
+VALUES(55,11,12345678,1),(55,71,56786578,2)
+
+SELECT * FROM Convenios
+SELECT * FROM TelefonesConvenios
+
+SELECT * FROM Convenios
+JOIN TelefonesConvenios
+ON Convenios.idConvenio = TelefonesConvenios.idConvenio
