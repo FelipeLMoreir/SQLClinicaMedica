@@ -99,6 +99,28 @@ VALUES(55,11,12345678,1),(55,71,56786578,2)
 SELECT * FROM Convenios
 SELECT * FROM TelefonesConvenios
 
-SELECT * FROM Convenios
-JOIN TelefonesConvenios
-ON Convenios.idConvenio = TelefonesConvenios.idConvenio
+SELECT c.NomeConvenio, c.Siteconvenio, c.CNPJ, 
+		t.CodPais, t.CodArea, t.Numero, 
+		e.Logradouro, e.Numero, e.Complemento, e.Bairro, 
+		e.Cidade, e.CEP
+FROM Convenios c
+JOIN TelefonesConvenios t
+ON c.idConvenio = t.idConvenio
+JOIN Endereco e
+ON c.idEndereco = e.id
+
+ALTER TABLE Convenios
+ADD idEndereco INT 
+
+ALTER TABLE Convenios
+ADD FOREIGN KEY (idEndereco) REFERENCES Endereco(id)
+
+INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, CEP)
+VALUES('Avenida das Nações', 1000, 'Centro', 
+'São Paulo', 1023456)
+
+SELECT * FROM Endereco
+
+UPDATE Convenios
+SET idEndereco = 4
+WHERE idConvenio = 1
