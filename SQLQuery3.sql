@@ -61,7 +61,7 @@ SELECT * FROM Endereco
 SELECT * FROM Pacientes
 
 INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, CEP)
-VALUES('Rua Principal', 123, 'Centro', 'Araraquara', 14810-200)
+VALUES('Rua Principal', 123, 'Centro', 'Araraquara', 14810200)
 
 INSERT INTO Pacientes
 VALUES('Felipe', 'Pestana', 12345, '1984-08-19', 1)
@@ -104,10 +104,41 @@ SELECT c.NomeConvenio, c.Siteconvenio, c.CNPJ,
 		e.Logradouro, e.Numero, e.Complemento, e.Bairro, 
 		e.Cidade, e.CEP
 FROM Convenios c
+LEFT JOIN TelefonesConvenios t
+ON c.idConvenio = t.idConvenio
+LEFT JOIN Endereco e
+ON c.idEndereco = e.id
+
+SELECT c.NomeConvenio, c.Siteconvenio, c.CNPJ, 
+		t.CodPais, t.CodArea, t.Numero, 
+		e.Logradouro, e.Numero, e.Complemento, e.Bairro, 
+		e.Cidade, e.CEP
+FROM Convenios c
+RIGHT JOIN TelefonesConvenios t
+ON c.idConvenio = t.idConvenio
+RIGHT JOIN Endereco e
+ON c.idEndereco = e.id
+
+SELECT c.NomeConvenio, c.Siteconvenio, c.CNPJ, 
+		t.CodPais, t.CodArea, t.Numero, 
+		e.Logradouro, e.Numero, e.Complemento, e.Bairro, 
+		e.Cidade, e.CEP
+FROM Convenios c
 JOIN TelefonesConvenios t
 ON c.idConvenio = t.idConvenio
 JOIN Endereco e
 ON c.idEndereco = e.id
+
+SELECT c.NomeConvenio, c.Siteconvenio, c.CNPJ, 
+		t.CodPais, t.CodArea, t.Numero, 
+		e.Logradouro, e.Numero, e.Complemento, e.Bairro, 
+		e.Cidade, e.CEP
+FROM Convenios c
+FULL JOIN TelefonesConvenios t
+ON c.idConvenio = t.idConvenio
+FULL JOIN Endereco e
+ON c.idEndereco = e.id
+
 
 ALTER TABLE Convenios
 ADD idEndereco INT 
@@ -119,8 +150,14 @@ INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, CEP)
 VALUES('Avenida das Nações', 1000, 'Centro', 
 'São Paulo', 1023456)
 
+INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, CEP)
+VALUES('AV Interlagos', 123, 'Autodromo', 'Interlagos', 14810200)
+
 SELECT * FROM Endereco
 
+INSERT INTO TelefonesConvenios
+VALUES (55,31,9999999, 3)
+
 UPDATE Convenios
-SET idEndereco = 4
-WHERE idConvenio = 1
+SET idEndereco = 8
+WHERE idConvenio = 3
